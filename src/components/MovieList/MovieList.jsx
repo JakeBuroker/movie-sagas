@@ -12,8 +12,8 @@ function MovieList() {
     dispatch({ type: 'FETCH_MOVIES' });
   }, []);
   
-    function onClick(movieId) {
-      dispatch({ type: "SET_DETAILS", payload: movieId});
+    function onClick(movie) {
+      dispatch({ type: "SET_DETAILS", payload: movie});
       history.push("/DetailsView")
     }
   
@@ -27,7 +27,7 @@ function MovieList() {
           return (
             <div data-testid='movieItem' key={movie.id}>
               <h3>{movie.title}</h3>
-              <img data-testid="toDetails"onClick= {(event) => onClick(movie.id)} src={movie.poster} alt={movie.title}/>
+              <img data-testid="toDetails"onClick= {(event) => onClick(movie)} src={movie.poster} alt={movie.title}/>
             </div>
           );
         })}

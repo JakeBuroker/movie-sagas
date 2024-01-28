@@ -9,34 +9,20 @@ import axios from 'axios';
 
 function DetailsView() {
  const history = useHistory()
+ const details = useSelector(store => store.details);
 
- const [movieDetails, setMovieDetails] = useState([]);
-  const fetchDetails = () => {
-    axios
-      .get("/api/movies")
-      .then((response) => {
-        console.log(response.data);
-        setMovieDetails(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
-    fetchDetails();
-  }, [])
 
     return (
         <main>
-        <h1>MovieList</h1>
-        <section className="movies">
-          {movieDetails.map(movie => {
-            return (
-              <div  key={movie.id}>
-                <h3>{movie.title}</h3>
+            <button data-testid="toList"onClick={() => history.push("./")} >Return To Movies List</button>
+        <h1> Details </h1>
+        <section data-testid="movieDetails">
+              <div>
+                <h3> {details.title}</h3>
+                <img src={details.poster} alt={details.title}/>
+                <h3>{details.description}</h3>
+               
               </div>
-            );
-          })}
         </section>
       </main> )}
   
