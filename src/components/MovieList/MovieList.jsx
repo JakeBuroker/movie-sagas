@@ -11,7 +11,12 @@ function MovieList() {
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
   }, []);
-
+  
+    function onClick(movieId) {
+      dispatch({ type: "SET_DETAILS", payload: movieId});
+      history.push("/DetailsView")
+    }
+  
 
 
   return (
@@ -22,7 +27,7 @@ function MovieList() {
           return (
             <div data-testid='movieItem' key={movie.id}>
               <h3>{movie.title}</h3>
-              <img data-testid="toDetails" onClick= {() => history.push("/DetailsView")} src={movie.poster} alt={movie.title}/>
+              <img data-testid="toDetails"onClick= {(event) => onClick(movie.id)} src={movie.poster} alt={movie.title}/>
             </div>
           );
         })}
