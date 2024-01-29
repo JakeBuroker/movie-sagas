@@ -57,9 +57,6 @@ const genre = (state = [], action) => {
   }
 }
 
-
-
-
 const details = (state = {}, action) => {
   if (action.type === "SET_DETAILS") {
     console.log('in input reducer', action.payload);

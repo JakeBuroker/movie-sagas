@@ -1,14 +1,20 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
 
 function DetailsView() {
   const dispatch = useDispatch();
   const history = useHistory();
   const details = useSelector(store => store.details);
   const id = useSelector(store => store.genres.id);
-  const genre = useSelector(store => store.genre)
+  const genre = useSelector(store => store.genre);
 
   useEffect(() => {
     if (id) {
@@ -30,24 +36,40 @@ function DetailsView() {
 
   return (
     <main>
-      <button data-testid="toList" onClick={() => history.push("./")}>Return To Movies List</button>
-      <h1> Details </h1>
-      <section data-testid="movieDetails">
-        <div>
-          <h3>{details.title}</h3>
-          <img src={details.poster} alt={details.title} />
-          <h3>Genre:</h3>
-          {genre.map(genre => (
-            <div data-testid='movieItem' key={genre.name}>
-              <p>{genre.name}</p>
-            </div>  
+      <Card sx={{ maxWidth: 600, margin: 'auto', mt: 2 }}>
+        <CardMedia
+          component="img"
+          height="300"
+          image={details.poster}
+          alt={details.title}
+          sx={{
+            objectFit: 'contain'
+          }}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {details.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {details.description}
+          </Typography>
+          <Typography sx={{ mt: 2, mb: 1 }} variant="body1">
+            Genres:
+          </Typography>
+          {genre.map(genreItem => (
+            <Chip key={genreItem.name} label={genreItem.name} sx={{ mr: 1 }} />
           ))}
-        </div>
-        <h3>Description:</h3>
-        <p>{details.description}</p>
-      </section>
+        </CardContent>
+      </Card>
+      <Button
+        variant="contained"
+        sx={{ mt: 2 }}
+        onClick={() => history.push("./")}
+      >
+        Return To Movies List
+      </Button>
     </main>
   );
 }
-  
-  export default DetailsView;
+
+export default DetailsView;
