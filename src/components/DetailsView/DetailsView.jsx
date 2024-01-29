@@ -34,9 +34,10 @@ function DetailsView() {
       });
   };
 
-  return (
-    <main>
-      <Card sx={{ maxWidth: 600, margin: 'auto', mt: 2 }}>
+  return ( 
+    <main  >
+       <h1>Details</h1>
+      <Card data-testid="movieDetails" sx={{ maxWidth: 600, margin: 'auto', mt: 2 }}>
         <CardMedia
           component="img"
           height="300"
@@ -62,6 +63,7 @@ function DetailsView() {
         </CardContent>
       </Card>
       <Button
+      data-testid="toList"
         variant="contained"
         sx={{ mt: 2 }}
         onClick={() => history.push("./")}

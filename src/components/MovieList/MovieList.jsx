@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import './MovieList.css';
 
 function MovieList() {
@@ -23,39 +24,48 @@ function MovieList() {
   }
 
   return (
-    <main>
-      <h1>MovieList</h1>
-      <section className="movies">
-      {movies.map(movie => (
-  <Card 
-    key={movie.id} 
-    data-testid='movieItem' 
-    onClick={() => onClick(movie)} 
-    sx={{ 
-      cursor: 'pointer', 
-      margin: 4, 
-      maxWidth: 500,
-    }}
-  >
-    <CardMedia
-      component="img"
-      image={movie.poster}
-      alt={movie.title}
-      data-testid="toDetails"
-      sx={{
-        objectFit: 'contain',
-      }}
-    />
-    <CardContent>
-      <Typography gutterBottom variant="h8" component="div">
-        {movie.title}
-      </Typography>
-    </CardContent>
-  </Card>
-
-))}
-      </section>
-    </main>
+<main>
+  <h1>MovieList</h1>
+  <Grid container spacing={2} className="movies">
+    {movies.map(movie => (
+      <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
+        <Card
+          data-testid='movieItem'
+          onClick={() => onClick(movie)}
+          sx={{
+            height: '100%',
+            cursor: 'pointer',
+          }}
+        >
+          <CardMedia
+            component="img"
+            image={movie.poster}
+            alt={movie.title}
+            data-testid="toDetails"
+            sx={{
+              height: 300, 
+              objectFit: 'contain',
+            }}
+          />
+          <CardContent>
+            <Typography 
+              gutterBottom 
+              variant="body1" 
+              noWrap
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              <b>{movie.title}</b>
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    ))}
+  </Grid>
+</main>
 )}
 
 export default MovieList;
