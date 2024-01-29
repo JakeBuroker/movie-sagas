@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import axios from 'axios';
 function MovieList() {
   const dispatch = useDispatch();
   const movies = useSelector(store => store.movies);
@@ -14,10 +14,9 @@ function MovieList() {
   
     function onClick(movie) {
       dispatch({ type: "SET_DETAILS", payload: movie});
+      dispatch({ type: "SET_GENRES", payload: movie});
       history.push("/DetailsView")
     }
-  
-
 
   return (
     <main>

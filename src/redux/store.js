@@ -6,8 +6,9 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-  yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-}
+  yield takeEvery('FETCH_MOVIES', fetchAllMovies)
+  }
+
 
 function* fetchAllMovies() {
   try {
@@ -22,6 +23,9 @@ function* fetchAllMovies() {
     console.log('fetchAllMovies error:', error);
   }
 }
+
+
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -46,6 +50,10 @@ const genres = (state = [], action) => {
   }
 }
 
+
+
+
+
 const details = (state = {}, action) => {
   if (action.type === "SET_DETAILS") {
     console.log('in input reducer', action.payload);
@@ -68,5 +76,6 @@ const storeInstance = createStore(
 
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
+
 
 export default storeInstance;
