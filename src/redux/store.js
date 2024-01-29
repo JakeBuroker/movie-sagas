@@ -12,9 +12,7 @@ function* rootSaga() {
 
 function* fetchAllMovies() {
   try {
-    // Get the movies:
     const moviesResponse = yield axios.get('/api/movies');
-    // Set the value of the movies reducer:
     yield put({
       type: 'SET_MOVIES',
       payload: moviesResponse.data
@@ -50,6 +48,14 @@ const genres = (state = [], action) => {
   }
 }
 
+const genre = (state = [], action) => {
+  switch (action.type) {
+    case 'GENRES':
+      return action.payload;
+    default:
+      return state;
+  }
+}
 
 
 
@@ -69,6 +75,7 @@ const storeInstance = createStore(
     movies,
     genres,
     details,
+    genre,
   }),
   // Add sagaMiddleware to our store
   applyMiddleware(sagaMiddleware, logger),
